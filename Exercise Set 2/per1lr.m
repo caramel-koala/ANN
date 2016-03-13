@@ -1,6 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%per1.m
-%weight updating, multiple nodes, neural perceptron
+%per1lr.m
+%weight updating, multiple nodes, neural perceptron with a variable
+%learning rate
 %AUTHOR: Antonio Peters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -13,19 +14,26 @@ while true
 	%pattern
 	P	= input('Pattern:');
 	if size(P) == 0
-		P 	= [	1 1 -1 -2 -1;
-				2 -2 -1 0 2];
+		P 	= [	1   1   2   3;
+                1   1   1   2;
+                1   2   2   4];
 	end
 	[vals(1), vals(2)] = size(P);
 	
 	%target
 	T	= input('Target:');
 	if size(T) == 0
-		T 	= [1 1 0 0 0];
+		T 	= [ 1   1   0   1;
+                1   1   1   0];
 	end
 	[vals(3), vals(4)] = size(T);
-				
-	if vals(2)==vals(4);
+    
+    r   = input('Learning Rate:');
+    if size(r) == 0
+        r = 1;
+    end
+    
+	if vals(2)==vals(4)
 		break
 	else
 		fprintf('Invalid input, please try again \n');
@@ -43,31 +51,34 @@ A = hardlim(W*P);
 
 %calculate error
 E = T - A;
-E2 = sum(E.^2);
+E2 = sum(sum(E.^2));
 
 %loop halting variable
 halt = 0;
-maxitter = 100;
+maxitter = 1000;
 
-while sum(E.^2) ~= 0 && halt < maxitter
+while sum(sum(E.^2)) ~= 0 && halt < maxitter
 	%update
-	W = W + E * P';
+	W = W + r * E * P';
 	
 	A = hardlim(W*P);
 
 	E = T - A;
     
-    E2 = [E2, sum(E.^2)];
+    E2 = [E2, sum(sum(E.^2))];
 
 	halt = halt + 1;
 end
 
+%plot error
+plot(0:halt,E2);
+
 if halt == maxitter
 	fprintf('Data set is not linearly separable within %d itterations.\n', maxitter);
 	return;
-else
-    fprintf('Final weighting: [%d] \n Number of itterations: %d \n',W,halt);
 end
+    
+fprintf('Number of itterations: %d \n',halt);
 
 
 while true
@@ -75,9 +86,8 @@ while true
 	yn	= input('Clasify another point? Yes = 1, No = 0 (default = No):');
 
 	%check result
-	if size(yn) == 0 || yn == 0
+	if size(yn) == 0
 		%exit loop
-		hold off;
 		break;
     elseif yn == 1
 		%get new pattern
@@ -91,7 +101,6 @@ while true
 		a = hardlim(W*Pnew')
 	else 
 		%exit loop
-		hold off;
 		break;
 	end
 	
