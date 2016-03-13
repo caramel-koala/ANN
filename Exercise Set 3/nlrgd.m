@@ -22,7 +22,7 @@ E 		= sum((f(x,t)-y).^2);
 a		= 0.01;
 count	= 2;
 
-while(E > 0 )%&& count < 10000)
+while(E > sqrt(a) )%&& count < 10000)
 	x		= x - (a/sqrt(count))*(sum(gradE(x,t),2)./length(t));
 	E 		= sum((f(x,t)-y).^2)
 	count = count +1;

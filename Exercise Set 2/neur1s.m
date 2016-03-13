@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%neur1a.m
-%weight updating, single node, neural perceptron
+%neur1s.m
+%weight updating, single node, neural perceptron using sequential training
 %AUTHOR: Antonio Peters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -50,7 +50,14 @@ maxitter = 100;
 
 while sum(E.^2) ~= 0 && halt < maxitter
 	%update
-	W = W + E * P';
+    
+    i = mod(halt,vals(2)) + 1;
+    
+    a = hardlim(W*P(:,i));
+    
+    e = T(i) - a;
+    
+	W = W + e * P(:,i)';
 	
 	A = hardlim(W*P);
 
