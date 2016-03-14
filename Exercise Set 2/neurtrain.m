@@ -34,7 +34,7 @@ E   = T - A;
 halt    = 0;
 max = 1000;
 
-while sum(E.^2) > 0 && halt < max
+while sum(sum(E.^2)) > 0 && halt < max
     %update
 	W = W + E * P';
 	
