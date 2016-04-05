@@ -1,0 +1,49 @@
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+\documentclass{article}% A4 paper and 11pt font size
+
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage[]{mcode} %Matlab code package
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\title{	
+\textsc{Artificial Neural Networks} \\ [25pt] % Your university, school and/or department name(s)
+\huge Exercise Set 3 \\ % The assignment title
+}
+
+\author{Antonio Peters} % Your name
+
+\date{\today} % Today's date or a custom date
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%DOCUMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\maketitle % Print the title
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Proof of Convergence of the Perceptron Learning Rule}
+Assume the matrix $P = [p_1,\dots,p_m]$ as a set of input patterns and the matrix $T = [t_1,\dots,t_m]$ as a set of targets in a perceptron network with $s$ layers. Each column of $P$, $p_i$ is activated and the result $a_i \in A$ is compared to the corresponding column of $T$, $t_i$. The activation can be seen as
+\begin{equation}
+\begin{align}
+  &a_i = \text{hardlim}(W*p_i + b) \\
+  &\text{Or for the entire matrix} \\
+  &A = \text{hardlim}(W*P + b)
+\end{align}
+\end{equation}
+We can reorder the activation by grouping the weighting and bias and adding a row of ones to $P$ as in Equation \ref{reorder}
+\begin{equation}\label{reorder}
+  V = [W b] \quad \text{and} \quad q_i = \begin{bmatrix} p_i \\ 1 \end{bmatrix} \quad \text{or} \quad Q = \begin{bmatrix} P \\ 1,\dots,1 \end{bmatrix}
+\end{equation}
+This is then updated to adjust for the error between $A$ and $T$, $E$ with $e_i \in E$, $e_i = t_i - a_i$ and the matrix $V$ is updated for each element of $Q$ such that
+\begin{equation}
+  V_{k+1} = V_k + e_iq_i
+\end{equation}
+Where $V_{k+1}$ is the updated $V$ to be used with $V_0$ being randomly set and in this particular case we prove for $V_0 \neq 0$. We assume that $\forall k$, $V_{k+1} \neq V_k$. Looking at any single neuron of $V_k$ denoted by $v_k$. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
