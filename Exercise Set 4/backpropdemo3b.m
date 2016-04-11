@@ -1,6 +1,6 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%backpropdemo3a.m
-%Example 4.3.4 of the Notes
+%backpropdemo3b.m
+%Based on Example 4.3.4 bu with a varying number of hidden layer nodes
 %AUTHOR: Antonio Peters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 clear
@@ -17,11 +17,11 @@ error('different sample sizes');
 end
 
 % the number of neurons in each layer
-s1=3;
-s2=2;
+s1=4;
+s2=3;
 s3=s;
 %transfer functions
-f1=@logsig;
+f1=@tansig;
 f2=@tansig;
 f3=@purelin;
 %learning rate
@@ -58,7 +58,7 @@ while abs(E)>tol & k<maxit
     %derivative matrices
     D3=eye(s3);
     D2=diag(1-a2.^2);
-    D1=diag((1-a1).*a1);
+    D1=diag(1-a1.^2);
     %sensitivities
     S3= -2*D3*e;
     S2= D2*W3'*S3;
@@ -90,30 +90,3 @@ plot(p,a3,'*')
 plot(x,y)
 hold off
 title(sprintf('activation vs targets r2 stat = %g\n',rsq))
-
-%simulate on another input of the same size
-u=input('simulate on another 9X1 input: x =');
-u=u(:);
-%produce activation
-a1=f1(n1);
-n2=W2*a1+b2;
-a2=f2(n2);
-n3=W3*a2+b3;
-v=f3(n3);
-w=2*sin(3*v)+1;
-%compare:
-disp('new activation and function value')
-[v w(:)]
-figure
-plot(p,t,'o')
-hold on
-plot(u,v,'*')
-plot(x,y)
-hold off
-title(sprintf('new activation and targets \n'))
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%As shown by the data given above, new inputs which vary from the original
-%P generate the same output as that of P, even though this is incorrect for
-%the new data, it is due to the fact that the network has been trained to
-%generate the T of P and not on the relationship between P and T.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
