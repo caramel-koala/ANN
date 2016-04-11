@@ -42,7 +42,7 @@ We can reorder the activation by grouping the weighting and bias and adding a ro
 \end{equation}
 This is then updated to adjust for the error between $A$ and $T$, $E$ with $e_i \in E$, $e_i = t_i - a_i$ and the matrix $V$ is updated for each element of $Q$ such that
 \begin{equation}
-  V_{k+1} = V_k + e_iq_i
+  V_{k+1} = V_k + e_iq_i'
 \end{equation}
 Where $V_{k+1}$ is the updated $V$ to be used with $V_0$ being randomly set and in this particular case we prove for $V_0 \neq 0$. We assume that $\forall k$, $V_{k+1} \neq V_k$. Looking at any single neuron of $V_k$ denoted by $v_k$. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
