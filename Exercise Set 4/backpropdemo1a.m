@@ -31,7 +31,7 @@ b1=randu(-1,1,s1,1);
 tol=.001;
 %counter
 k=1;
-maxit=1000;
+maxit=100;
 E(1)=1;
 
 while abs(E)>tol & k<maxit
@@ -43,9 +43,13 @@ while abs(E)>tol & k<maxit
     e=t-a1;
     sse=sum(e.^2);
     E(k)=sse;
+    %derivative matrices
+    D1=diag(1-a1.^2);
+    %sensitivities
+    S1= -2*D1*e;
     %update
-    W1=W1-h*e*p';
-    b1=b1-h*e;
+    W1=W1-h*S1*p';
+    b1=b1-h*S1;
 end
 %remove the first error: E(1)
 E=E([2:end]);
