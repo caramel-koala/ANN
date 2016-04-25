@@ -3,15 +3,11 @@
 %Based on Example 4.3.4 bu with a varying number of hidden layer nodes
 %AUTHOR: Antonio Peters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-clear
-clc
-close all
-%generate inputs and targets
-p=[0:pi/4:2*pi]';
-t=3*sin(2*p)+1;
+function [E,a3] = backpropdemo3b(p,t,tol);
+
+%check that the number of samples are the same
 [r,q]=size(p);
 [s,q1]=size(t);
-%check that the number of samples are the same
 if (q~=q1)
 error('different sample sizes');
 end
@@ -35,8 +31,6 @@ b2=randu(-1,1,s2,1);
 W3=randu(-1,1,s3,s2);
 b3=randu(-1,1,s3,1);
 
-%tolerance
-tol=.001;
 %counter
 k=1;
 maxit=100;
@@ -74,19 +68,4 @@ end
 %remove the first error: E(1)
 E=E([2:end]);
 
-figure
-plot(E);
-xlabel('iterations');
-ylabel('E');
-title(sprintf('Performance with tolerance = %g\n',tol));
-rsq= r2(a3,t);
-%compare with function
-x=linspace(0,2*pi,101);
-y=3*sin(2*x)+1;
-figure
-plot(p,t,'o')
-hold on
-plot(p,a3,'*')
-plot(x,y)
-hold off
-title(sprintf('activation vs targets r2 stat = %g\n',rsq))
+end

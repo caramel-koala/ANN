@@ -3,15 +3,11 @@
 %Example 4.3.4 of the Notes
 %AUTHOR: Antonio Peters
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-clear
-clc
-close all
-%generate inputs and targets
-p=[0:pi/4:2*pi]';
-t=3*sin(2*p)+1;
+function [E,a3] = backpropdemo3a(p,t,tol);
+
+%check that the number of samples are the same
 [r,q]=size(p);
 [s,q1]=size(t);
-%check that the number of samples are the same
 if (q~=q1)
 error('different sample sizes');
 end
@@ -35,8 +31,6 @@ b2=randu(-1,1,s2,1);
 W3=randu(-1,1,s3,s2);
 b3=randu(-1,1,s3,1);
 
-%tolerance
-tol=.001;
 %counter
 k=1;
 maxit=100;
@@ -74,43 +68,7 @@ end
 %remove the first error: E(1)
 E=E([2:end]);
 
-figure
-plot(E);
-xlabel('iterations');
-ylabel('E');
-title(sprintf('Performance with tolerance = %g\n',tol));
-rsq= r2(a3,t);
-%compare with function
-x=linspace(0,2*pi,101);
-y=3*sin(2*x)+1;
-figure
-plot(p,t,'o')
-hold on
-plot(p,a3,'*')
-plot(x,y)
-hold off
-title(sprintf('activation vs targets r2 stat = %g\n',rsq))
-
-%simulate on another input of the same size
-u=input('simulate on another 9X1 input: x =');
-u=u(:);
-%produce activation
-a1=f1(n1);
-n2=W2*a1+b2;
-a2=f2(n2);
-n3=W3*a2+b3;
-v=f3(n3);
-w=2*sin(3*v)+1;
-%compare:
-disp('new activation and function value')
-[v w(:)]
-figure
-plot(p,t,'o')
-hold on
-plot(u,v,'*')
-plot(x,y)
-hold off
-title(sprintf('new activation and targets \n'))
+end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %As shown by the data given above, new inputs which vary from the original
 %P generate the same output as that of P, even though this is incorrect for
