@@ -1,0 +1,35 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+
+%opening
+\title{Artificial Neural Networks:\\ Exercise Set 4}
+\author{Antonio Peters}
+
+\begin{document}
+
+\maketitle
+
+\section{Question 3}
+As shown by the data given, new inputs which vary from the original $P$ generate the same output as that of $P$, even though this is incorrect for the new data, it is due to the fact that the network has been trained to generate the $T$ of $P$ and not on the relationship between $P$ and $T$.
+
+\section{Question 9}
+If there is only one pattern and one target then our equation
+\begin{equation}
+ t = f(Wq+b)
+\end{equation}
+need only fit the target perfectly, with no need to interpolate new data. Since $t$,$f$ and $q$ are already known, all that is needed is to solve for $W$ and $b$. $W$ and $b$ can be combined into $V$ where $V=[W b]$ by appending $p$ into $q$ with $q=[p;1]$. This then transforms the equation into 
+\begin{equation}
+ t = f(Vq)
+\end{equation}
+Thereby leaving us with only one unknown, $V$. The equation can then be easily transformed to solve for $V$
+\begin{equation}
+\begin{align}
+ t &= f(Vq)\\
+ Vq &= f^{-1}(t)\\
+ V &= f^{-1}(t)/q\\
+\end{align}
+\end{equation}
+Since this equation has an exact solution, a perfect fitting from $p$ to $t$ can be found by solving for $V$. As stated before, this solution will be ill-advised for a neural network as it only fits these data points and cannot properly equate any new points in the system.
+
+\end{document}

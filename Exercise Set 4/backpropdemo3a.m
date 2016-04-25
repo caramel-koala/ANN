@@ -69,9 +69,3 @@ end
 E=E([2:end]);
 
 end
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%As shown by the data given above, new inputs which vary from the original
-%P generate the same output as that of P, even though this is incorrect for
-%the new data, it is due to the fact that the network has been trained to
-%generate the T of P and not on the relationship between P and T.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
