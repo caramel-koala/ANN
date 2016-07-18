@@ -8,8 +8,10 @@ clear
 clc
 close all
 %generate inputs and targets
-p=[0:pi/4:2*pi]';
-t=3*sin(2*p)+1;
+%p=[0:pi/4:2*pi]';
+%t=3*sin(2*p)+1;
+p = [3;-4;2];
+t = [3;-3];
 
 %tolerance
 tol=.001;
@@ -43,12 +45,12 @@ ylabel('E');
 title(sprintf('Performance with tolerance = %g\n',tol));
 rsq= r2(a,t);
 %compare with function
-x=linspace(0,2*pi,101);
-y=3*sin(2*x)+1;
-figure
-plot(p,t,'o')
-hold on
-plot(p,a,'*')
-plot(x,y)
-hold off
-title(sprintf('activation vs targets r2 stat = %g\n',rsq))
+% x=linspace(0,2*pi,101);
+% y=3*sin(2*x)+1;
+% figure
+% plot(p,t,'o')
+% hold on
+% plot(p,a,'*')
+% plot(x,y)
+% hold off
+% title(sprintf('activation vs targets r2 stat = %g\n',rsq))
