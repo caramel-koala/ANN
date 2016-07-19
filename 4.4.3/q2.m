@@ -11,7 +11,7 @@ x(2,:)= 1:10;
 %fix test results
 x(3,:)=50*ones(10,1);
 %deploy the net
-y=ugradnet(x)
+y=ugradnet(x);
 %plots
 figure
 plot(x(2,:),y(1,:))
@@ -27,26 +27,26 @@ plot(x(1,:),y(2,:))
 title('semester 2 vs Swedish points for a fixed test result of 50')
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%a
+%b
 
 %Fix Swedish points
-x(1,:)=30*ones(10,1);
+xb(1,:)=30*ones(10,1);
 %vary school quality
-x(2,:)= 1:10;
+xb(2,:)= 1:10;
 %vary test results
-x(3,:)=50*ones(10,1);
+xb(3,:)=linspace(26,46,10);
 %deploy the net
-y=ugradnet(x)
+yb=ugradnet(xb);
 %plots
 figure
-plot(x(2,:),y(1,:))
-title('semester 1 vs School Quality for a fixed test result of 50')
+plot(xb(2,:),yb(1,:))
+title('semester 1 vs School Quality for a fixed Swedish points of 30')
 figure
-plot(x(2,:),y(2,:))
-title('semester 2 vs School Quality for a fixed test result of 50')
+plot(xb(2,:),yb(2,:))
+title('semester 2 vs School Quality for a fixed Swedish points of 30')
 figure
-plot(x(1,:),y(1,:))
-title('semester 1 vs Swedish points for a fixed test result of 50')
+plot(xb(3,:),yb(1,:))
+title('semester 1 vs Test results for a fixed Swedish points of 30')
 figure
-plot(x(1,:),y(2,:))
-title('semester 2 vs Swedish points for a fixed test result of 50')
+plot(xb(3,:),yb(2,:))
+title('semester 2 vs Test results for a fixed Swedish points of 30')
