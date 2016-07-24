@@ -1,6 +1,7 @@
 %School_train.m
 %trains a neural net on the data from schools.txt
 %Modefied from ugrad_train.m
+%Simplist learning is a two layer tansig->purelin function
 %Author: Antonio Peters
 
 clc
@@ -58,26 +59,30 @@ t2n=tn(:,I2);
 %
 %network architecture
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% W1(s1Xr) W2(s2Xs1) W3(s3Xs2)
-% p(2Xq)---------->a1 ------------->a2----------->----->a3(s3Xq)
-% b1(s1X1) b2(s2Xs1) b3(s3Xs2)
+% W1(s1Xr) W2(s2Xs1)
+% p(2Xq)---------->a1 ------------->a2(s3Xq)
+% b1(s1X1) b2(s2Xs1)
 %
 % tansig logsig purelin
 %layer sizes:
-s1=9;
-s2=9;
-s3=s;
+% s1=9;
+% s2=9;
+% s3=s;
+s1 = 9;
+s2 = s;
 %initialise
 W1=randu(-1,1,s1,r);
 b1=randu(-1,1,s1,1);
 W2=randu(-1,1,s2,s1);
 b2=randu(-1,1,s2,1);
-W3=randu(-1,1,s3,s2);
-b3=randu(-1,1,s3,1);
+% W3=randu(-1,1,s3,s2);
+% b3=randu(-1,1,s3,1);
 %transfer functions
-f1=@tansig;
-f2=@logsig;
-f3=@purelin;
+% f1=@tansig;
+% f2=@logsig;
+% f3=@purelin;
+f1 =@tansig;
+f2 =@purelin
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Training parameters
@@ -98,7 +103,7 @@ maxit=800;
 
 %train on normalised data: p1n, t1n
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-while mse>tol & k<maxit
+while mse>tol && k<maxit
 k=k+1;
 for j=1:q1
 %propagate input patterns through the net
@@ -106,26 +111,29 @@ n1=W1*p1n(:,j)+b1;
 a1=f1(n1);
 n2=W2*a1+b2;
 a2=f2(n2);
-n3=W3*a2+b3;
-a3=f3(n3);
-an(:,j)=a3;
+% n3=W3*a2+b3;
+% a3=f3(n3);
+% an(:,j)=a3;
+an(:,j)=a2;
 %j th error vector
 e(:,j)=t1n(:,j)-an(:,j);
 %derivative matrices
-D3=eye(s3);
-D2=diag((1-a2).*a2);
+% D3=eye(s3);
+% D2=diag((1-a2).*a2);
 D1=diag(1-a1.^2);
+D2 = eye(s2);
 %sensitivity vectors
-S3=-2*D3*e(:,j);
-S2=D2*W3'*S3;
+% S3=-2*D3*e(:,j);
+% S2=D2*W3'*S3;
+S2 = -2*D2*e(:,j);
 S1=D1*W2'*S2;
 %store sensitivities
 SS([1:s1],k-1,1)=S1;
 SS([s1+1:s1+s2],k-1)=S2;
-SS([s1+s2+1:s1+s2+s3],k-1)=S3;
+% SS([s1+s2+1:s1+s2+s3],k-1)=S3;
 %update weights and biases
-W3=W3-h*S3*a2';
-b3=b3-h*S3;
+% W3=W3-h*S3*a2';
+% b3=b3-h*S3;
 W2=W2-h*S2*a1';
 b2=b2-h*S2;
 W1=W1-h*S1*p1n(:,j)';
