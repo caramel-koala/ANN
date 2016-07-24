@@ -1,5 +1,6 @@
+%Deploys ugrad2net
 %Author: Antonio Peters
-%Deploys ugradnet for testing
+
 clear all
 close all
 clc
@@ -13,7 +14,7 @@ x(2,:)= linspace(1,10,100);
 %fix test results
 x(3,:)=50*ones(100,1);
 %deploy the net
-y=ugradnet(x);
+y=ugrad2net(x);
 %plots
 figure
 plot(x(2,:),y(1,:))
@@ -38,7 +39,7 @@ xb(2,:)= linspace(1,10,100);
 %vary test results
 xb(3,:)=1:100;
 %deploy the net
-yb=ugradnet(xb);
+yb=ugrad2net(xb);
 %plots
 figure
 plot(xb(2,:),yb(1,:))
@@ -63,7 +64,7 @@ xc(2,:)= 6*ones(100,1);
 %vary test results
 xc(3,:)=1:100;
 %deploy the net
-yb=ugradnet(xb);
+yb=ugrad2net(xb);
 %plots
 figure
 plot(xb(3,:),yb(1,:))

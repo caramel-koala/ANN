@@ -1,6 +1,7 @@
-%taken from the textbook
-function y=ugradnet(x)
-load ugrad_train.mat
+%Analyses new data on the ugrad_train neural net
+%Author: Antonio Peters
+function y=ugrad2net(x)
+load ugrad2_train.mat
 if size(x,1)~=r
 error('x incorrect size');
 end

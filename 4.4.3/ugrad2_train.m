@@ -1,4 +1,6 @@
 %ugrad2_train
+%trains on ugraddata5.txt using an iterative random sampling
+%Author: Antonio Peters
 clc
 clear
 close all
@@ -90,7 +92,7 @@ E(1)=mse;
 %set tolerance
 tol =1e-8;
 %max iterations
-maxit=80000;
+maxit=8000;
 
 %train on normalised data: p1n, t1n
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
