@@ -20,8 +20,8 @@ ttrain  = y(9:end-10)';
 ttest   = y(end-9:end)';
 
 %set layer sizes
-s1 = 10;
-s2 = 10;
+s1 = 9;
+s2 = 9;
 
 %create net
 net = newff(ptrain,ttrain,[s1,s2]);
