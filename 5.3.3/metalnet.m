@@ -1,5 +1,6 @@
 %metalnet.m
 %uses a rolling average prediction to predict the price of metal;
+%Author: Antonio Peters
 
 clc;
 clear;
@@ -10,21 +11,27 @@ netlist = [];
 
 for j=1:size(x,2)
     
+    m(1) = x(1,j);
+    for i = 2:size(x,1)
+        m(i) = 0.6*x(i) + 0.4*m(i-1);
+    end
+    
     sl = 50; %slide window
     %set p's and t's
-    for i = 1:size(x,1)-sl
-        p(:,i) = x(i:i+sl-1,j);
+    for i = 1:length(m)-sl
+        p(:,i) = m(i:i+sl-1);
     end
+    
     ptrain  = p(:,1:end-10);
     ptest   = p(:,end-9:end);
 
-    t       = x(sl+1:end,j)';
+    t       = m(sl+1:end);
     ttrain  = t(1:end-10);
     ttest   = t(end-9:end);
 
     %set layer sizes
-    s1 = 9;
-    s2 = 9;
+    s1 = 10;
+    s2 = 15;
 
     %create net
     net = newff(ptrain,ttrain,[s1,s2]);
