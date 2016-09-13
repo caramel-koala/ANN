@@ -34,7 +34,7 @@ for j=1:size(x,2)
     s2 = 15;
 
     %create net
-    net = newff(ptrain,ttrain,[s1,s2]);
+    net = newfftd(ptrain,ttrain,[s1,s2]);
 
     %Net training
     net.TrainParam.epochs=1000;
