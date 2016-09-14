@@ -72,8 +72,6 @@ atest   = sim(connet,ptest);
 r2=rsq(ttest,atest)
 [R,pv]=corrcoef(ttest,atest)
 
-atest = round(atest);
-
 %plot results
 plot(ttest,ttest,'b',ttest,atest,'r*');
 

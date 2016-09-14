@@ -156,23 +156,23 @@ The concrete strength approximation set seeks to approximate the compressive str
 We begin by importing the data and normalising it so it can be used as input into the net. The data is presented as a series of $9$ double values, each separated by a comma, this represents the $8$ parameters and the corresponding result. The data is first separated into a $8 \times n$ matrix for the input and a vector of $n$ length for the output.
 \\
 \\
-The data is then split into training and testing sets in a ratio of $3:1$. A 3-layer feed-forward neural network will be used to train on the training data. A triple nested for-loop is generated to iterate through the number of neurons for each of the net's layers from $1$ to $20$. From this, the best net is selected and stored, the criteria for the best network is based resulting in the highest $r^2$ and Correlation Coefficient values determined by simulating the network on the remaining test data. Once a best network has been found, the error on the test set can be determined and plotted with the actual output as blue circles and the simulated output as red asterisks in Figure \ref{fig:contrain}.
+The data is then split into training and testing sets in a ratio of $3:1$. A 3-layer feed-forward neural network will be used to train on the training data. A triple nested for-loop is generated to iterate through the number of neurons for each of the net's layers from $1$ to $20$. From this, the best net is selected and stored, the criteria for the best network is based resulting in the highest $r^2$ and Correlation Coefficient values determined by simulating the network on the remaining test data. Once a best network has been found, the error on the test set can be determined by observing Figure \ref{fig:contrain}, where the actual output is represented by a blue line and the simulated output as red asterisks.
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{Images/seedtrain.jpg}
+\includegraphics[scale=0.5]{Images/contrain.jpg}
 \caption{Concrete best NN test error.}
 \label{fig:contrain}
 \end{figure}
-blah
+From this we can see that while the simulation is approximately correct, it does not perfectly match the output. The net generates a correlation coefficient of 0.9304 and a $r^2$ value of $0.8632$, showing that the data has adequate linear correlation. The network has 20, 4 and 3 neurons per layer.
 \\
 \\
 Now that we have the best net for our given data set, we can simulate on the reserved $20$ element as a final validation test. We begin this process by normalising the data by the same method as the training set. We then simulate on this normalised data and plot the output. The data is presented with the actual output as blue circles and the simulated output as red asterisks, this can be seen in Figure \ref{fig:contest}.
 \begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{Images/seedtest.jpg}
+\includegraphics[scale=0.45]{Images/contest.jpg}
 \caption{Concrete net on the reserved test data.}
 \label{fig:contest}
 \end{figure}
-blah
+From this it can be seen that the simulation approximates the output to within $10$ of the exact output. While this is adequate for a general approximation, it cannot be said that this is the optimal net for training on this data.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document} 
