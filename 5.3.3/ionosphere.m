@@ -32,36 +32,33 @@ for i=1:size(S,2)
     
     for j=1:size(S,2)
         
-        for k = 1:size(S,2)
-            
-            s = [i,j,k];
+        s = [i,j];
 
-            %create the net
-            net=newff(ptrain,ttrain,s);
+        %create the net
+        net=newff(ptrain,ttrain,s);
 
-            %set goal>0
-            net.trainParam.goal=1e-8;
-            net=init(net);
-            [net,tr]=train(net,ptrain,ttrain);
-            ionnet=net;
+        %set goal>0
+        net.trainParam.goal=1e-8;
+        net=init(net);
+        [net,tr]=train(net,ptrain,ttrain);
+        ionnet=net;
 
-            %simulate
-            atrain=sim(ionnet,ptrain); %train
-            atest=sim(ionnet,ptest); %test
-            a=sim(ionnet,p); %all
+        %simulate
+        atrain=sim(ionnet,ptrain); %train
+        atest=sim(ionnet,ptest); %test
+        a=sim(ionnet,p); %all
 
-            atest = round(atest);
+        atest = round(atest);
 
-            r2=rsq(ttest,atest);
-            [R,PV]=corrcoef(ttest,atest);
-            %-------------------------------------------------
-            Corr(i,j)=R(1,2);
-            R2(i,j,:)=r2;
-            if (abs(R(1,2))+sum(r2) > bestcandr)
-                bestcandr = abs(R(1,2))+r2;
-                bestlay = [i,j,k];
-                bestnet = ionnet; %sets the best net
-            end
+        r2=rsq(ttest,atest);
+        [R,PV]=corrcoef(ttest,atest);
+        %-------------------------------------------------
+        Corr(i,j)=R(1,2);
+        R2(i,j,:)=r2;
+        if (abs(R(1,2))+sum(r2) > bestcandr)
+            bestcandr = abs(R(1,2))+r2;
+            bestlay = [i,j];
+            bestnet = ionnet; %sets the best net
         end
     end
 end
@@ -80,3 +77,5 @@ r2=rsq(ttest,atest)
 %plot results
 x = 1:size(ttest,2);
 plot(x,ttest,'bo',x,atest,'r*');
+
+save ionosphere.mat

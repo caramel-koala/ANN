@@ -23,9 +23,8 @@ for i = 1:size(T,2)
 end
 
 %split into sets
-[ptrain,pval,ptest,trainInd,valInd,testInd] = dividerand(p,0.6,0.2,0.2);
+[ptrain,pval,ptest,trainInd,valInd,testInd] = dividerand(p,0.65,0,0.25);
 [ttrain,tval,ttest] = divideind(t,trainInd,valInd,testInd);
-
 
 %layer sizes
 S=[1:20];
